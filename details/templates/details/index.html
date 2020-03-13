@@ -57,6 +57,7 @@ $( ".search" ).click(function() {
         <div class="row center">
            <form action="/teacher/" method="post" >
              {% csrf_token %}
+
           <div class="input-field col m12 s12">
 
                       <label for="autocomplete-input">Search The Teacher.                    .                               .                                     .</label>
@@ -77,7 +78,16 @@ $( ".search" ).click(function() {
                     </span><i class="white-text close material-icons">close</i></label>
   </div>{% endfor %}{% endif %}
             <br>
-            <table id="example" class="display" style="width:100%">
+
+{{mcours}}
+    <div class="col s12">
+      <ul id="tabs-swipe-demo" class="tabs">
+    <li class="tab col s3"><a class="active" href="#test-swipe-1">Result</a></li>
+    <li class="tab col s3"><a  href="#test-swipe-2">Analytic</a></li>
+
+  </ul>
+  <div id="test-swipe-1" class="col s12 ">
+      <table id="example" class="display" style="width:100%">
             <thead>
             <tr>
     <th>Year</th>
@@ -93,20 +103,60 @@ $( ".search" ).click(function() {
 <td >{{t.year}}</td>
 <td>{{t.teachesSemester}}</td>
         <td>{{t.program}}</td>
-<td>{{t.teachesSubjects}}</td>
+<td>{{t.subject}}</td>
 <td>{{t.courseComplete}}</td>
         </tr>
 {%endfor%}
     </table>
-        </div>
+
+  </div>
+  <div id="test-swipe-2" class="col s12">
+      <form method="POST" id="opt_level"  data-url="/teacher/">
+    {% csrf_token %}
+           <div class="input-group mg-b-pro-edt">
+                   <span class="input-group-addon"><i class="fa  fa-institution" aria-hidden="true"></i></span>
+                   <input   type="text" name="teacher" value="{{teacher}}" class="form-control" placeholder="Last Teaching Institution">
+               </div>
+
+
+
+                     <div class="input-field right col s5">
+                        <select  name="r">
+
+                            {% for subj in subje %}
+                            <option value="{{subj.subject__subject}}">
+
+
+                                    {{ subj.subject__subject }}
+
+
+
+                            </option>
+                            {% endfor %}
+
+                        </select>
+
+                      </div>
+                        </form><br>
+    <div class="row col s12 " style="width:100%;">
+		<canvas id="canvas"></canvas>
+	</div>
+  </div>
+
+  </div>
+
+
+
       </div>
+  </div>
   </div>
   <br>
   <footer class="page-footer teal" style="margin-top:40% !important;">
     <div class="container">
       Made by <a class=" text-lighten-3" href="http://materializecss.com">KCMIT TEAM</a>
       </div>
-    </div>
+
+
   </footer>
   {% else %}
    <div class="section " style="height:60vh !important; margin-top:10%;">
@@ -144,12 +194,7 @@ $( ".search" ).click(function() {
                               <a href="#!" class="modal-close waves-effect waves-green btn-flat">Agree</a>
                             </div>
   </div>
-<!--                                <div class="alert {{ message.tags }} alert-success alert-success-style3 alert-st-bg2 alert-st-bg13 alert-dismissible" role="alert">-->
-<!--                                    <button type="button" class="close sucess-op" data-dismiss="alert" aria-label="Close">-->
-<!--                                      <span aria-hidden="true">&times;</span>-->
-<!--                                    </button>-->
-<!--                                    {{ message }}-->
-<!--                                  </div>-->
+
                             {% endfor %}
                             </div>
                     </div>
@@ -170,183 +215,8 @@ $( ".search" ).click(function() {
   </div>
   <br>
 
-<!--  <div class="section no-pad-bot">-->
-<!--      <div class="container">-->
-<!--        <div class="row center">-->
-<!--          <table id="example" class="display" style="width:100%">-->
-<!--            <thead>-->
-<!--                <tr>-->
-<!--                    <th>Year</th>-->
-<!--                    <th>Semester</th>-->
-<!--                    <th>Subjects</th>-->
-<!--                    <th>Course Complete(in Days)</th>-->
-
-<!--                </tr>-->
-<!--            </thead>-->
-<!--            <tbody>-->
-<!--              <tr>-->
-<!--                <td>Tiger Nixon</td>-->
-<!--                <td>System Architect</td>-->
-<!--                <td>Edinburgh</td>-->
-<!--                <td>61</td>-->
-
-<!--            </tr><tr>-->
-<!--                <td>Tiger Nixon</td>-->
-<!--                <td>System Architect</td>-->
-<!--                <td>Edinburgh</td>-->
-<!--                <td>61</td>-->
-
-<!--            </tr><tr>-->
-<!--                <td>Tiger Nixon</td>-->
-<!--                <td>System Architect</td>-->
-<!--                <td>Edinburgh</td>-->
-<!--                <td>61</td>-->
-
-<!--            </tr><tr>-->
-<!--                <td>Tiger Nixon</td>-->
-<!--                <td>System Architect</td>-->
-<!--                <td>Edinburgh</td>-->
-<!--                <td>61</td>-->
-
-<!--            </tr>-->
-<!--            </tbody>-->
-<!--          </table>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--  </div>-->
-<!--
-  <div id="index-banner" class="parallax-container">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <br><br>
-
-
-        <h1 class="header center teal-text text-lighten-2">Parallax Template</h1>
-        <div class="row center">
-          <form class="col s12">
-
-        <div class="input-field center col s6">
-          <input placeholder="Placeholder" id="first_name" type="text" class="validate">
-
-        </div>
-
-    </form>
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-        <div class="row center">
-          <a href="http://materializecss.com/getting-started.html" id="download-button" class="btn-large waves-effect waves-light teal lighten-1">Get Started</a>
-        </div>
-        <br><br>
-
-      </div>
-    </div>
-    <div class="parallax"><img src="{% static 'background1.jpg' %}" alt="Unsplashed background img 1"></div>
-  </div>
-
-
-  <div class="container">
-    <div class="section">
-
-         Icon Section
-      <div class="row">
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">flash_on</i></h2>
-            <h5 class="center">Speeds up development</h5>
-
-            <p class="light">We did most of the heavy lifting for you to provide a default stylings that incorporate our custom components. Additionally, we refined animations and transitions to provide a smoother experience for developers.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">group</i></h2>
-            <h5 class="center">User Experience Focused</h5>
-
-            <p class="light">By utilizing elements and principles of Material Design, we were able to create a framework that incorporates components and animations that provide more feedback to users. Additionally, a single underlying responsive system across all platforms allow for a more unified user experience.</p>
-          </div>
-        </div>
-
-        <div class="col s12 m4">
-          <div class="icon-block">
-            <h2 class="center brown-text"><i class="material-icons">settings</i></h2>
-            <h5 class="center">Easy to work with</h5>
-
-            <p class="light">We have provided detailed documentation as well as specific code examples to help new users get started. We are also always open to feedback and can answer any questions a user may have about Materialize.</p>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="{% static 'background2.jpg'%}" alt="Unsplashed background img 2"></div>
-  </div>
-
-  <div class="container">
-    <div class="section">
-
-      <div class="row">
-        <div class="col s12 center">
-          <h3><i class="mdi-content-send brown-text"></i></h3>
-          <h4>Contact Us</h4>
-          <p class="left-align light">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam scelerisque id nunc nec volutpat. Etiam pellentesque tristique arcu, non consequat magna fermentum ac. Cras ut ultricies eros. Maecenas eros justo, ullamcorper a sapien id, viverra ultrices eros. Morbi sem neque, posuere et pretium eget, bibendum sollicitudin lacus. Aliquam eleifend sollicitudin diam, eu mattis nisl maximus sed. Nulla imperdiet semper molestie. Morbi massa odio, condimentum sed ipsum ac, gravida ultrices erat. Nullam eget dignissim mauris, non tristique erat. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;</p>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-
-  <div class="parallax-container valign-wrapper">
-    <div class="section no-pad-bot">
-      <div class="container">
-        <div class="row center">
-          <h5 class="header col s12 light">A modern responsive front-end framework based on Material Design</h5>
-        </div>
-      </div>
-    </div>
-    <div class="parallax"><img src="{% static 'background3.jpg' %}" alt="Unsplashed background img 3"></div>
-  </div>
--->
   <footer class="page-footer teal">
-<!--    <div class="container">-->
-<!--      <div class="row">-->
-<!--        <div class="col l6 s12">-->
-<!--          <h5 class="white-text">Company Bio</h5>-->
-<!--          <p class="grey-text text-lighten-4">We are a team of college students working on this project like it's our full time job. Any amount would help support and continue development on this project and is greatly appreciated.</p>-->
 
-
-<!--        </div>-->
-<!--        <div class="col l3 s12">-->
-<!--          <h5 class="white-text">Settings</h5>-->
-<!--          <ul>-->
-<!--            <li><a class="white-text" href="#!">Link 1</a></li>-->
-<!--            <li><a class="white-text" href="#!">Link 2</a></li>-->
-<!--            <li><a class="white-text" href="#!">Link 3</a></li>-->
-<!--            <li><a class="white-text" href="#!">Link 4</a></li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--        <div class="col l3 s12">-->
-<!--          <h5 class="white-text">Connect</h5>-->
-<!--          <ul>-->
-<!--            <li><a class="white-text" href="#!">Link 1</a></li>-->
-<!--            <li><a class="white-text" href="#!">Link 2</a></li>-->
-<!--            <li><a class="white-text" href="#!">Link 3</a></li>-->
-<!--            <li><a class="white-text" href="#!">Link 4</a></li>-->
-<!--          </ul>-->
-<!--        </div>-->
-<!--      </div>-->
-<!--    </div>-->
     <div class="footer-copyright teal" >
       <div class="container ">
       Made by  :<a class="white-text " href="/teacher/">KCMIT TEAM</a>
@@ -360,10 +230,71 @@ $( ".search" ).click(function() {
   <script src="{% static 'js/materialize.js' %}"></script>
   <script src="{% static 'js/init.js' %}"></script>
   <script type="text/javascript" src="{% static 'js/datatables.min.js' %}"></script>
+  <script src="{% static 'js/area-chart.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+
+   <script>
+
+    var config = {
+      type: 'line',
+      data: {
+        datasets: [{
+
+        data: {{ course|safe }},
+
+
+          backgroundColor: [
+              'yellowgreen'
+          ],
+          label: 'Course Complete'
+        }],
+        labels: {{ teachers_year|safe }}
+      },
+      options: {
+        responsive: true
+      }
+    };
+
+    window.onload = function() {
+      var ctx = document.getElementById('canvas').getContext('2d');
+      window.myPie = new Chart(ctx, config);
+    };
+
+  </script>
+  <script>
+
+
+$(document).ready(function(){
+             var $myform = $('#opt_level');
+
+             $myform.on("change", function(event){
+
+                 event.preventDefault();
+                 var $formData = $myform.serialize();
+                 var $thisURL = $myform.attr('data-url');
+                 $.ajax({
+                     method:"POST",
+                     url:$thisURL,
+                     data:$formData,
+                     success:handleSuccess,
+                     error:handleError,
+                 });
+                 function handleSuccess(data){
+                 console.log(data);
+                 }
+                 function handleError(ThrowError){
+                 console.log(ThrowError);
+                 }
+
+             });
+        });
+</script>
    <script>
 
 $(document).ready(function(){
-
+$('select').formSelect();
+$('.tabs').tabs();
 $('#example').DataTable({
 "searching":     false
 });
@@ -378,5 +309,6 @@ $('#example').DataTable({
 
   </script>
 
-  </body>
+
+</body>
 </html>

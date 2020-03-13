@@ -4,6 +4,7 @@ class subjects(models.Model):
     subject = models.CharField(max_length=30,default="None")
     def __str__(self):
         return self.subject
+
 class teacherDetails(models.Model):
     teachername = models.CharField(max_length=30 ,default="None")
 
@@ -34,7 +35,7 @@ class teacher(models.Model):
         default="Select a Year",)
     program = models.ForeignKey(program ,on_delete=models.CASCADE)
     teachesSemester=models.ForeignKey(semester ,on_delete=models.CASCADE)
-    teachesSubjects = models.ForeignKey(subjects, on_delete=models.CASCADE)
+    subject = models.ForeignKey(subjects, on_delete=models.CASCADE, related_name='subcato',)
     courseComplete = models.IntegerField(blank=True,null=True)
     def __str__(self):
         return self.teachername.teachername
